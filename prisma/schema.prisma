@@ -14,8 +14,23 @@ datasource db {
 }
 
 model Task {
-  id        Int      @id @unique @default(autoincrement())
-  title     String
-  createdAt DateTime
-  completed Boolean
+  id          Int     @id @unique @default(autoincrement())
+  title       String
+  description String
+  completed   Boolean
+  priority    String // "low" | "medium" | "high"
+  difficult   String // "easy" | "medium" | "hard"
+
+  dateStart String // "10.02.2025" 
+  dateEnd   String // "15.02.2025"
+  timeStart String // "12:00"
+  timeEnd   String // "15:00"
+
+  createdAt String // Date
+}
+
+model Project {
+  id    String @id @unique
+  title String
+  color String
 }

@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { CreateTaskDto } from './dto/create-task.dto';
-import { UpdateTaskDto } from './dto/update-task.dto';
 import { PrismaService } from '../prisma/prisma.service.js';
+import { getCurrentDate } from '../utils/getCurrentDate.js';
+import { CreateTaskDto } from './dto/create-task.dto.js';
+import { UpdateTaskDto } from './dto/update-task.dto.js';
 
 @Injectable()
 export class TasksService {
@@ -22,9 +23,8 @@ export class TasksService {
   create(createTaskDto: CreateTaskDto) {
     return this.prisma.task.create({
       data: {
-        title: createTaskDto.title,
-        createdAt: new Date(),
-        completed: createTaskDto.completed,
+        ...createTaskDto,
+        createdAt: getCurrentDate(),
       },
     });
   }
